@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import messageRoutes from "./routes/messageRoutes.js";
-import { connectDB } from "./config/db.js";
+import messageRoutes from "./src/routes/messageRoutes.js";
+import { connectDB } from "./src/config/db.js";
+import cors from "cors";
 
 dotenv.config();
 connectDB();
