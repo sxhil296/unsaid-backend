@@ -2,9 +2,9 @@ import { isMessageAppropriate } from "../lib/moderation.js";
 import { Message } from "../models/messageModel.js";
 
 export const createMessage = async (req, res) => {
-  const { to, message, color } = req.body;
+  const { to, message, bgColor, textColor } = req.body;
 
-  if (!to || !message || !color) {
+  if (!to || !message || !bgColor || !textColor) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -17,7 +17,7 @@ export const createMessage = async (req, res) => {
         .json({ error: "Message contains inappropriate content" });
     }
 
-    const newMessage = new Message({ to, message, color });
+    const newMessage = new Message({ to, message, bgColor, textColor });
     const saved = await newMessage.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -37,7 +37,7 @@ export const getMessages = async (req, res) => {
   }
 
   if (colorFilter) {
-    query.color = colorFilter;
+    query.bgColor = colorFilter;
   }
 
   try {
