@@ -37,7 +37,10 @@ export const getMessages = async (req, res) => {
   }
 
   if (colorFilter) {
-    query.bgColor = colorFilter;
+    const colors = colorFilter
+      .split(",")
+      .map((c) => (c.startsWith("#") ? c : `#${c}`));
+    query.bgColor = { $in: colors };
   }
 
   try {
