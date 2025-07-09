@@ -62,3 +62,20 @@ export const getMessages = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch messages" });
   }
 };
+
+export const getMessageById = async (req, res) => {
+  const { id } = req.params;
+  console.log("Fetching message by ID:", id);
+
+  try {
+    const message = await Message.findById(id);
+
+    if (!message) {
+      return res.status(404).json({ error: "Message not found" });
+    }
+
+    res.status(200).json(message);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch the message" });
+  }
+};
