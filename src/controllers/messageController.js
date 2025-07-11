@@ -26,7 +26,7 @@ export const createMessage = async (req, res) => {
 };
 export const getMessages = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  const limit = parseInt(req.query.limit) || 50;
   const search = req.query.search || "";
   const colorFilter = req.query.color;
 
